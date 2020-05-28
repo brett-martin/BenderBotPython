@@ -44,10 +44,39 @@ class BenderAnimations():
         [expressions.getExpression("squint1"), 0.02],
         [expressions.getExpression("neutral"), 2.00]]
 
+        self._lookLeft = [
+        [expressions.getExpression("lookLeft1"), 0.02],
+        [expressions.getExpression("lookLeft2"), 2.00],
+        [expressions.getExpression("lookLeft1"), 0.02],
+        [expressions.getExpression("neutral"), 2.00]]
+
+        self._lookRight = [
+        [expressions.getExpression("lookRight1"), 0.02],
+        [expressions.getExpression("lookRight2"), 2.00],
+        [expressions.getExpression("lookRight1"), 0.02],
+        [expressions.getExpression("neutral"), 2.00]]
+
+        self._lookUp = [
+        [expressions.getExpression("lookUp1"), 0.02],
+        [expressions.getExpression("lookUp2"), 2.00],
+        [expressions.getExpression("lookUp1"), 0.02],
+        [expressions.getExpression("neutral"), 2.00]]
+
+        self._lookDown = [
+        [expressions.getExpression("lookDown1"), 0.02],
+        [expressions.getExpression("lookDown2"), 2.00],
+        [expressions.getExpression("lookDown1"), 0.02],
+        [expressions.getExpression("neutral"), 2.00]]
+
     def getAnimation(self, animationName):
         animations = {
             "angry": self._angry,
             "suspicious": self._suspicious,
-            "bored": self._bored
+            "bored": self._bored,
+            "lookUp": self._lookUp,
+            "lookLeft": self._lookLeft,
+            "lookRight": self._lookRight,
+            "lookUp": self._lookUp,
+            "lookDown": self._lookDown
         }
         return animations.get(animationName, self._none)

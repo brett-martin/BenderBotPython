@@ -56,4 +56,4 @@ class Bender():
 
     #Turns on or off the Antenna LED (True,False)
     def antennaOn(self, state):
-        _antennaLED.value = state
+        self._antennaLED.value = state
