@@ -52,6 +52,28 @@ class Bender():
         self._display.updateDisplay(2)
         self._colonLED.value = False
 
+    #Counts up from x to y in a loop with z seconds in between
+    def countUp(self, start, end, delay):
+        #TODO: check that start < end and is 0-9999 range
+        for number in range(start, end):
+            digits = self.getNumberArray(number)
+            self._display.showTime(digits)
+            self._display.updateDisplay(delay)
+
+    #Counts down from x to y in a loop with z seconds in between
+    def countDown(self, start, end, delay):
+        #TODO: check that start > end and is 0-9999 range
+        for number in range(start, end, -1):
+            digits = self.getNumberArray(number)
+            self._display.showTime(digits)
+            self._display.updateDisplay(delay)
+
+    #Converts an int 0-9999 into a zero-padded array of ints
+    def getNumberArray(self, someInt):
+        padded = f"{someInt:04}"
+        res = [int(x) for x in str(padded)]
+        return res
+
     #Turns on or off the Antenna LED (True,False)
     def antennaOn(self, state):
         self._antennaLED.value = state
