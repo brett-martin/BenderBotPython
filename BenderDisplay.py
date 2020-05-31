@@ -8,6 +8,8 @@ import busio
 from adafruit_ht16k33.matrix import MatrixBackpack16x8
 from BenderBot.BenderExpressions import BenderExpressions
 from BenderBot.BenderAnimations import BenderAnimations
+from BenderBot.Fonts.BenderNumbers import BenderNumbers
+from BenderBot.Fonts.BenderNumbersBold import BenderNumbersBold
 
 #TODO: Replace string values with enum
 #from enum import Enum
@@ -25,7 +27,7 @@ class BenderDisplay():
         self._expressions = BenderExpressions()  #An object to hold all available display expressions
         self._animations = BenderAnimations()    #An object to hold all available display expressions
         #self._numbers = BenderNumbers()         #An object to hold 0-9 Number data for a segment
-        #self._numbersBold = BenderNumbersBold() #An object to hold 0-9 Number data for a segment, Bold
+        self._numbers = BenderNumbersBold()      #An object to hold 0-9 Number data for a segment, Bold
 
         i2c = busio.I2C(board.SCL, board.SDA)
         i2cStart = 0x70
@@ -59,7 +61,7 @@ class BenderDisplay():
         for row in range(0,16):
             for col in range(0,8):
                 segment[row,7-col] = data[row][col]
-                #time.sleep(0.05) #Uncomment to watch in slowmo
+                #time.sleep(0.05) #Uncomment to watch in slowmo with auto_write = true
 
     #Shows values stored in _segments arrays then waits delay
     def updateDisplay(self, delay):
@@ -79,16 +81,13 @@ class BenderDisplay():
             self.updateDisplay(animation[frame][1])
 
     #Displays a single digit on a specific segment
-    def displayNumber(number, segment):
-        print("Display number")
-        # show a number on a specific segment
+    def displayNumber(self, number, segment):
+        self.updateSegment(self._displaySegments[segment], self._numbers.getNumber(number))
 
     #Shows the current time on the display
     def showTime(self, time):
         for digit in range(0, len(time)):
-            print(time[digit])
-        #For each int in 0-4 updateSegment with matching Segment number
-        print("Showing time")
+            self.displayNumber(time[digit], digit)
 
     @property
     def columns(self):

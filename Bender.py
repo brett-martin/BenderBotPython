@@ -14,7 +14,6 @@ class Bender():
 
         #Create the dispay object (Rows, Columns, Segments, brightness)
         self._display = BenderDisplay(16,8,4,0.2)
-        #animations = BenderAnimations()
         #mouth = BenderMouth()
         #trigger = BenderDistanceSensor()
         #RTC = RealTimeClock()
@@ -31,7 +30,6 @@ class Bender():
 
     #Gets the current time from RTC module
     def __getTime(self):
-        print("Get Time from RTC and return it in an array")
         #currentTime = RTC.getTime()
         #formattedTime = RTC.formatTime(currentTime)
         #return formattedTime
@@ -51,7 +49,7 @@ class Bender():
         currentTime = self.__getTime()
         self._colonLED.value = True
         self._display.showTime(currentTime)
-        time.sleep(2)
+        self._display.updateDisplay(2)
         self._colonLED.value = False
 
     #Turns on or off the Antenna LED (True,False)
