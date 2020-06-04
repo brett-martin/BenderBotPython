@@ -68,6 +68,32 @@ class BenderAnimations():
         [expressions.getExpression("lookDown1"), 0.02],
         [expressions.getExpression("neutral"), 2.00]]
 
+        self._shocked = [
+        [expressions.getExpression("shocked"), 2.00],
+        [expressions.getExpression("neutral"), 2.00]]
+
+        self._blink = [
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("blank"), 0.01],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("neutral"), 2.00]]
+
+        self._doubleBlink = [
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("blank"), 0.01],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("neutral"), 0.20],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("blank"), 0.01],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("neutral"), 2.00]]
+
     def getAnimation(self, animationName):
         animations = {
             "angry": self._angry,
@@ -77,6 +103,9 @@ class BenderAnimations():
             "lookLeft": self._lookLeft,
             "lookRight": self._lookRight,
             "lookUp": self._lookUp,
-            "lookDown": self._lookDown
+            "lookDown": self._lookDown,
+            "shocked": self._shocked,
+            "blink": self._blink,
+            "doubleBlink": self._doubleBlink
         }
         return animations.get(animationName, self._none)
