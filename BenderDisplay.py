@@ -4,7 +4,9 @@ BenderDisplay handles talking to the 4 16x8 LED Matrix arrays and displaying
 import time
 import board
 import busio
+import pulseio
 
+from digitalio import DigitalInOut, Direction, Pull
 from adafruit_ht16k33.matrix import MatrixBackpack16x8
 from BenderBot.BenderExpressions import BenderExpressions
 from BenderBot.BenderAnimations import BenderAnimations
@@ -17,19 +19,26 @@ from BenderBot.Fonts.BenderNumbersBold import BenderNumbersBold
 
 class BenderDisplay():
 
-    def __init__(self, rows, columns, segments, brightness):
+    def __init__(self, rows, columns, segments, brightness, i2c):
         self._rows = rows
         self._columns = columns
         self._segments = segments
         self._brightness = brightness
-
         self._displaySegments = []               #This holds the segment objects we create
         self._expressions = BenderExpressions()  #An object to hold all available display expressions
         self._animations = BenderAnimations()    #An object to hold all available display expressions
         #self._numbers = BenderNumbers()         #An object to hold 0-9 Number data for a segment
         self._numbers = BenderNumbersBold()      #An object to hold 0-9 Number data for a segment, Bold
 
-        i2c = busio.I2C(board.SCL, board.SDA)
+        # Create the Colon LED for displaying time and assign it to a board pin
+        self._colonLED = pulseio.PWMOut(board.D10, frequency=5000, duty_cycle=0)
+        self._colonBrightess = 10000
+
+        #Create the Antenna LED and assign it to a board pin
+        self._antennaLED = DigitalInOut(board.D11)
+        self._antennaLED.direction = Direction.OUTPUT
+        self._antennaLED.value = False
+
         i2cStart = 0x70
 
         #Setup segments in display
@@ -86,8 +95,21 @@ class BenderDisplay():
 
     #Shows the current time on the display
     def showTime(self, time):
+        #TODO: Remove leading 0 from time
         for digit in range(0, len(time)):
             self.displayNumber(time[digit], digit)
+        self.colonOn(True)
+
+    #Turns on or off the Antenna LED (True,False)
+    def antennaOn(self, state):
+        self._antennaLED.value = state
+
+    #Turns on or off the Colon LEDs (True,False)
+    def colonOn(self, state):
+        if state == True:
+            self._colonLED.duty_cycle = self._colonBrightess
+        else:
+            self._colonLED.duty_cycle = 0
 
     @property
     def columns(self):
