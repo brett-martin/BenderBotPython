@@ -25,6 +25,8 @@ from BenderBot.Expressions.ExpLookDown1 import ExpLookDown1
 from BenderBot.Expressions.ExpLookDown2 import ExpLookDown2
 from BenderBot.Expressions.ExpLookUp1 import ExpLookUp1
 from BenderBot.Expressions.ExpLookUp2 import ExpLookUp2
+from BenderBot.Expressions.ExpBlank import ExpBlank
+from BenderBot.Expressions.ExpShocked import ExpShocked
 
 class BenderExpressions():
 
@@ -52,6 +54,8 @@ class BenderExpressions():
         self._lookDown2 = ExpLookDown2().exp
         self._lookUp1 = ExpLookUp1().exp
         self._lookUp2 = ExpLookUp2().exp
+        self._blank = ExpBlank().exp
+        self._shocked = ExpShocked().exp
 
     def getExpression(self, expressionName):
         expressions = {
@@ -77,6 +81,8 @@ class BenderExpressions():
             "lookDown1": self._lookDown1,
             "lookDown2": self._lookDown2,
             "lookUp1": self._lookUp1,
-            "lookUp2": self._lookUp2
+            "lookUp2": self._lookUp2,
+            "blank": self._blank,
+            "shocked": self._shocked
         }
         return expressions.get(expressionName, self._neutral)
