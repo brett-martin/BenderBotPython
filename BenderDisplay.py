@@ -95,9 +95,11 @@ class BenderDisplay():
 
     #Shows the current time on the display
     def showTime(self, time):
-        #TODO: Remove leading 0 from time
         for digit in range(0, len(time)):
-            self.displayNumber(time[digit], digit)
+            if digit == 0:
+                self.displayNumber("blank", digit)
+            else:
+                self.displayNumber(time[digit], digit)
         self.colonOn(True)
 
     #Turns on or off the Antenna LED (True,False)
