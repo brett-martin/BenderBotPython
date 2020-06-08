@@ -96,7 +96,7 @@ class BenderDisplay():
     #Shows the current time on the display
     def showTime(self, time):
         for digit in range(0, len(time)):
-            if digit == 0:
+            if (digit == 0) and (time[digit] == 0):
                 self.displayNumber("blank", digit)
             else:
                 self.displayNumber(time[digit], digit)

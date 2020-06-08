@@ -17,7 +17,7 @@ class Bender():
         self._i2c = busio.I2C(board.SCL, board.SDA)
 
         #Create the dispay object (Rows, Columns, Segments, brightness, i2c bus)
-        self._display = BenderDisplay(16,8,4,0.2,self._i2c)
+        self._display = BenderDisplay(16,8,4,0.4,self._i2c)
 
         #Create the mouth object that will handle speech and mouth animation
         self._mouth = BenderMouth()
