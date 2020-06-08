@@ -5,6 +5,7 @@ bender = display(eyes) + time + sound + antennaLED + buttons + distance sensor +
 import board
 import busio
 import time
+import random
 from BenderBot.BenderDisplay import BenderDisplay
 from BenderBot.BenderMouth import BenderMouth
 from BenderBot.BenderTime import BenderTime
@@ -92,3 +93,20 @@ class Bender():
     #Pulses the Mouth LEDs
     def mouthOn(self): #Demo of what mouth might look like
         self._mouth.animateMouth()
+
+    #Plays random Animation
+    def playRandomAnimation(self):
+        r = random.randrange(0,8)
+        animations = {
+            0:"angry",
+            1:"suspicious",
+            2:"bored",
+            3:"lookUp",
+            4:"lookLeft",
+            5:"lookRight",
+            6:"lookUp",
+            7:"lookDown",
+            8:"shocked"
+        }
+        ani = animations.get(r, "neutral")
+        self.playAnimation(ani)

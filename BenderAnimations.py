@@ -94,6 +94,23 @@ class BenderAnimations():
         [expressions.getExpression("squint2"), 0.001],
         [expressions.getExpression("neutral"), 2.00]]
 
+        self._sleep = [
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("blank"), 1.00]]
+
+        self._wakeup = [
+        [expressions.getExpression("blank"), 0.10],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("neutral"), 0.50],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("blank"), 0.01],
+        [expressions.getExpression("squint4"), 0.001],
+        [expressions.getExpression("squint2"), 0.001],
+        [expressions.getExpression("neutral"), 2.00]]
+
     def getAnimation(self, animationName):
         animations = {
             "angry": self._angry,
@@ -106,6 +123,8 @@ class BenderAnimations():
             "lookDown": self._lookDown,
             "shocked": self._shocked,
             "blink": self._blink,
-            "doubleBlink": self._doubleBlink
+            "doubleBlink": self._doubleBlink,
+            "sleep": self._sleep,
+            "wakeup": self._wakeup,
         }
         return animations.get(animationName, self._none)
