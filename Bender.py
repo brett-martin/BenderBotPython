@@ -54,7 +54,7 @@ class Bender():
 
     #Shows the current time for x seconds
     def showTimeFor(self, delay):
-        currentTime = self._clock.getTimeArray()
+        currentTime = self._clock.getTime(True)
         self._display.showTime(currentTime)
         self._display.updateDisplay(delay)
         self.showExpression("blank",0.0)
